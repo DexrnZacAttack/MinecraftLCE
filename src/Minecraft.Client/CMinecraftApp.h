@@ -1,11 +1,12 @@
 #pragma once
-#include "types.h"
-#include "Minecraft.World/ArrayWithLength.h"
-#include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 
+#include "types.h"
+
+#include "Minecraft.Client/eGameHostOption.h"
+#include "Minecraft.World/ArrayWithLength.h"
 #include "Minecraft.World/level/gamemode/GameType.h"
+#include "Minecraft.World/level/levelgen/LevelGenerationOptions.h"
 #include "Minecraft.Core/profile/CProfile.h"
-#include "eGameHostOption.h"
 #include <Minecraft.Core/storage/C4JStorage.h>
 #include <string>
 
@@ -41,6 +42,7 @@ public:
     virtual void GetFileFromTPD(eTPDFileType, unsigned char*, unsigned int, unsigned char**, unsigned int*);
 
     int GetGameHostOption(unsigned int, eGameHostOption option);
+    int GetGameHostOption(eGameHostOption option);
     bool GetChangingSessionType();
     bool GetGameStarted();
     static void* getSkinIdFromPath(const std::wstring& path);
@@ -56,11 +58,12 @@ public:
     void InitialiseTips();
     void InitGameSettings();
 
-    static int DefaultOptionsCallback(void *, C4JStorage::PROFILESETTINGS *, int);
-    static int OptionsDataCallback(void *, int, unsigned short, C4JStorage::eOptionsCallback);
-    static void SignInChangeCallback(void *, bool, unsigned int);
-    static void ProfileReadErrorCallback(void *);
-    static void UpsellReturnedCallback(void *, eUpsellType, eUpsellResponse, int);
+
+    static int DefaultOptionsCallback(void*, C4JStorage::PROFILESETTINGS*, int);
+    static int OptionsDataCallback(void*, int, unsigned short, C4JStorage::eOptionsCallback);
+    static void SignInChangeCallback(void*, bool, unsigned int);
+    static void ProfileReadErrorCallback(void*);
+    static void UpsellReturnedCallback(void*, eUpsellType, eUpsellResponse, int);
 
     // note to self: vftable pushes everything over by 8 inside decompiler view
     unsigned char padding[312];
@@ -92,8 +95,8 @@ public:
     void FreeLocalTMSFiles(eTMSFileType) override;
     void GetLocalTMSFileIndex(wchar_t*, bool, eFileExtensionType) override;
     virtual void TemporaryCreateGameStart();
-    static int DisplaySavingMessageNX(void *, C4JStorage::ESavingMessage, int);
-    static void Callback_SaveGameIncomplete(void *, C4JStorage::ESaveIncompleteType);
+    static int DisplaySavingMessageNX(void*, C4JStorage::ESavingMessage, int);
+    static void Callback_SaveGameIncomplete(void*, C4JStorage::ESaveIncompleteType);
 
     void InitialiseDLCInfo();
     bool ReadProductCodes();
