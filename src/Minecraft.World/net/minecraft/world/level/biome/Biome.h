@@ -235,7 +235,7 @@ public:
     virtual bool isHumid();
     virtual float getCreatureProbability();
     virtual float getTemperature(const BlockPos*);
-    virtual void decorate(Level*, Random&, const BlockPos*);
+    virtual void decorate(Level*, Random&, const BlockPos&);
     virtual unsigned int getGrassColor(const BlockPos*);
     virtual unsigned int getFoliageColor(const BlockPos*);
     virtual void setGrassColor(const BlockPos*, unsigned int);
@@ -245,7 +245,7 @@ public:
     virtual int getBaseClass() = 0;
     virtual int getTemperatureCategory();
     virtual bool isAlwaysValidSpawn();
-    virtual void getWaterColor();
+    virtual unsigned int getWaterColor();
     virtual Vec3* getFogColor(float, float) const;
     virtual bool isFoggy();
     virtual bool isNatural();
@@ -256,13 +256,15 @@ public:
     Biome* setPreviewColor(eMinecraftColour color);
     Biome* setWaterSkyColor(eMinecraftColour water, eMinecraftColour sky);
 
-    void getMobs(MobCategory*);
+    std::vector<Biome::MobSpawnerData>* getMobs(MobCategory*);
 
     std::wstring getName(bool);
     std::wstring getDescription();
 
     float getTemperature();
     float getDownfall();
+    float getDepth();
+    float getScale();
 
     static void generateColoursDebugOutput();
 
